@@ -1,0 +1,102 @@
+﻿
+<link href="~/css/bootstrap.css" rel="stylesheet" />
+<link href="~/css/sort.css?15" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="~/js/sort.js?20"></script>
+
+
+
+
+<style>
+   
+.Paging{
+
+    }
+
+    th{
+        width:100px;
+        background-color: #337ab7;
+        color: #fff;
+        border-color: #2e6da4;
+        
+    }
+    tr:nth-child(even){
+        background-color:#f2f2f2;
+
+    }
+    #sort{
+        color: #fff;
+
+    }
+</style>
+@model IEnumerable<Mentorship.Models.Mentor>
+<a href="@Url.Action("Create","Mentor")">Create New </a>
+
+<table>
+   
+    <tr>
+        
+        <th >
+            <a id="sort" href="/Mentor/Index?PAGE2=1&SORTDIR2=DESC&SORTCOL2=EmployeeId">EmployeeId</a>
+        </th>
+        <th>
+            <a id="sort" href="/Mentor/Index?PAGE2=1&SORTDIR2=DESC&SORTCOL2=EmployeeName">EmployeeName</a>
+        </th>
+        <th>
+            <a id="sort" href="/Mentor/Index?PAGE2=1&SORTDIR2=DESC&SORTCOL2=EmployeeMail">EmployeeMail</a>
+        </th>
+        <th>
+            <a id="sort" href="/Mentor/Index?PAGE2=1&SORTDIR2=DESC&SORTCOL2=Unit">Unit</a>
+        </th>
+        <th>
+            <a id="sort"  href="/Mentor/Index?PAGE2=1&SORTDIR2=DESC&SORTCOL2=CurrentCity">CurrentCity</a>
+        </th>
+        <th>
+            <a id="sort" href="/Mentor/Index?PAGE2=1&SORTDIR2=DESC&SORTCOL2=PrimaryTechskills">PrimaryTechSkills</a>
+        </th>
+        @* <th>
+            @Html.DisplayNameFor(model => model.EmployeeId)
+        </th>
+         <th>
+            @Html.DisplayNameFor(model => model.EmployeeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Unit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CurrentCity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PrimaryTechSkills)
+        </th> *@
+
+    </tr>
+    @foreach(var ment in Model)
+    {
+        <tr>
+
+            <td id="decision"><a href="Mentor/Edit?id=@ment.EmployeeId">@ment.EmployeeId</a></td>
+            <td>@ment.EmployeeName</td>
+            <td>@ment.EmployeeEmail</td>
+            <td>@ment.Unit</td>
+            <td>@ment.CurrentCity</td>
+            <td>@ment.PrimaryTechSkills</td>
+            <td><a href="Mentor/Delete?id=@ment.EmployeeId">Delete</a></td>
+           
+        </tr>
+    }
+    <tr style="background-color:none;"><td colspan="6" class="Paging"></td></tr>
+</table>
+
+<script>
+    window.onload = function () {
+        appendPaging2('@ViewBag.TotalPages');
+
+        //appendSorting2('Q1FY22');
+        appendSorting2('EmployeeId;EmployeeName;EmployeeMail;Unit;CurrentCity;PrimaryTechSkills;');
+    };
+
+</script>

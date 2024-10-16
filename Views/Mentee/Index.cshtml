@@ -1,0 +1,119 @@
+﻿@*  @model System.Data.DataTable;  *@
+
+<link href="~/css/bootstrap.css" rel="stylesheet" />
+<link href="~/css/sort.css?15" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="~/js/sort.js?20"></script>
+
+
+ 
+
+@*@model IEnumerable<Mentorship.Models.Mentee>; *@
+
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    th{
+        width:100px;
+        background-color: #337ab7;
+        color: #fff;
+        border-color: #2e6da4;
+
+    }
+    tr:nth-child(even){
+        background-color:#f2f2f2;
+
+    }
+    #sort{
+        color: #fff;
+        margin-left:10px;
+    }
+</style>
+<h3>Mentor Details</h3>
+@model IEnumerable<Mentorship.Models.Mentee>
+
+<a href="@Url.Action("Create","Mentee")">Create New</a>
+   
+   <table>
+    <tr>
+        <th >
+            <a id="sort" href="/Mentee/Index?PAGE2=1&SORTDIR2=DESC&SORTCOL2=EmployeeId">EmployeeId</a>
+        </th>
+        <th>
+            <a id="sort" href="/Mentee/Index?PAGE2=1&SORTDIR2=DESC&SORTCOL2=MenteeName">MenteeName</a>
+        </th>
+        <th>
+            <a id="sort" href="/Mentee/Index?PAGE2=1&SORTDIR2=DESC&SORTCOL2=MenteeeeMail">MenteeMail</a>
+        </th>
+        <th>
+            <a id="sort" href="/Mentee/Index?PAGE2=1&SORTDIR2=DESC&SORTCOL2=Unit">Unit</a>
+        </th>
+        <th>
+            <a id="sort" href="/Mentee/Index?PAGE2=1&SORTDIR2=DESC&SORTCOL2=CurrentCity">CurrentCity</a>
+        </th>
+        <th>
+            <a id="sort" href="/Mentee/Index?PAGE2=1&SORTDIR2=DESC&SORTCOL2=BenchAge">BenchAge</a>
+        </th>
+        <th>
+            <a id="sort" href="/Mentee/Index?PAGE2=1&SORTDIR2=DESC&SORTCOL2=SelectedPrimTechSkills">PrimaryTechSkills</a>
+        </th>
+        <th>
+            <a id ="sort" href="/Mentee/Index?PAGE2=1&SORTDIR2=DESC&SORTCOL2=MentorEmpId">MentorEmpId</a>
+        </th>
+        <th>
+            <a id="sort" href="/Mentor/Index?PAGE2=1&SORTDIR2=DESC&SORTCOL2=MentorshipStartDate">MentorshipStartDate</a>
+        </th>
+        <th>
+            <a id="sort" href="/Mentor/Index?PAGE2=1&SORTDIR2=DESC&SORTCOL2=MentorshipEndDate">MentorshipEndDate</a>
+        </th>
+        <th>
+            <a id="sort" href="/Mentor/Index?PAGE2=1&SORTDIR2=DESC&SORTCOL2=IsReleased">IsReleased</a>
+        </th>
+        <th>
+            <a id="sort" href="/Mentor/Index?PAGE2=1&SORTDIR2=DESC&SORTCOL2=MentorComments">MentorComments</a>
+        </th>
+        <th>
+            <a id="sort" href="/Mentor/Index?PAGE2=1&SORTDIR2=DESC&SORTCOL2=ReleaseComments">ReleaseComments</a>
+        </th>
+        <th> 
+            <a id="sort" href="/Mentor/Index?PAGE2=1&SORTDIR2=DESC&SORTCOL2=ReleasedReason">ReleasedReason</a>
+        </th>
+   </tr>
+
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <td><a href="Mentee/Edit?id=@item.EmployeeId">@item.EmployeeId</a></td>
+            <td>@item.MenteeName</td>
+            <td>@item.MenteeMail</td>
+            <td>@item.Unit</td>
+            <td>@item.CurrentCity</td>
+            <td>@item.BenchAge</td>
+            <td>@item.SelectedPrimTechSkills</td>
+            <td>@item.MentorEmpId</td>
+            <td>@item.MentorshipStartDate</td>
+            <td>@item.MentorshipEndDate</td>
+            <td>@item.IsReleased</td>
+            <td>@item.MentorComments</td>
+            <td>@item.ReleaseComments</td>
+            <td>@item.ReleasedReason</td>
+            <td><a href="Mentee/Delete?id=@item.EmployeeId">Delete</a></td>
+
+        </tr>
+
+    }
+    <tr style="background-color:none;">
+        <td colspan="6" class="Paging"></td>   
+    </tr>
+   </table>
+<script>
+    window.onload = function () {
+        appendPaging2('@ViewBag.TotalPages');
+
+        //appendSorting2('Q1FY22');
+        appendSorting2('EmployeeId;MenteeName;MenteeMail;Unit;CurrentCity;BenchAge;SelectedPrimTechSkills;MentorEmpId;MentorshipStartDate;MentorshipEndDate;IsReleased;MentorComments;ReleaseComments;ReleasedReason');
+    };
+
+</script>
